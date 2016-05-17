@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
  */
 public class Format {
 
-	private static final DecimalFormat AMTFORMAT = new DecimalFormat("###,###.##");
+	private static final DecimalFormat AMTFORMAT = new DecimalFormat("£###,##0.00");
 	
 	public static String format(double amt) {
 		return AMTFORMAT.format(amt);
