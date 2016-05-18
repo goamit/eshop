@@ -1,5 +1,7 @@
 package com.eshop.inventory;
 
+import com.eshop.util.Format;
+
 /**
  * Represent an immutable offer/discount model
  * @author goamit
@@ -39,6 +41,10 @@ public final class Offer {
 		return price;
 	}
 
+	public String getDesc() {
+		return type.getDesc() + " " + qty + " for " + Format.format(price);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
