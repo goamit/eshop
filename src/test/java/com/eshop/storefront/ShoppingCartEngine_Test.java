@@ -3,12 +3,12 @@ package com.eshop.storefront;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
-import java.util.Map;
-
+import java.util.HashMap;
 import org.junit.Test;
 
 import com.eshop.Assist;
 import com.eshop.inventory.Inventory;
+import com.eshop.inventory.Price;
 import com.eshop.inventory.Product;
 import com.eshop.service.Request;
 import com.eshop.storefront.LineItem;
@@ -16,11 +16,18 @@ import com.eshop.storefront.ShoppingCartEngine;
 
 public class ShoppingCartEngine_Test {
 
-	@SuppressWarnings("unchecked")
+	@Test
+	public void testProcessInvalidRequest() {
+		try {
+			ShoppingCartEngine.instance().process(new Request());
+			fail("IllegalArgumentException is expected");
+		} catch (IllegalArgumentException e) {}
+	}
+	
 	@Test
 	public void testProcessCheckOutWhenNoProductFound() {
 		Inventory inventory = mock(Inventory.class);
-		when(inventory.lookupPrices(Assist.keys)).thenReturn(mock(Map.class));
+		when(inventory.lookupPrices(Assist.keys)).thenReturn(new HashMap<String, Price>());
 		
 		ShoppingCartEngine requestHandler = ShoppingCartEngine.instance();
 		requestHandler.setInventory(inventory);
