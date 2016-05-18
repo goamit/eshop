@@ -9,6 +9,15 @@ import com.eshop.storefront.Basket;
 public class Request_Test {
 
 	@Test
+	public void testEmptyRequest() {
+		Request request = new Request();
+		assertTrue(request.isEmpty());
+		
+		request.addItem("a");
+		assertFalse(request.isEmpty());
+	}
+	
+	@Test
 	public void testAddItemsOrResponses() {
 		Request request = new Request();
 		
