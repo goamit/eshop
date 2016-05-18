@@ -9,6 +9,15 @@ import com.eshop.Assist;
 public class Basket_Test {
 
 	@Test
+	public void testEmptyRequest() {
+		Basket basket = new Basket();
+		assertTrue(basket.isEmpty());
+		
+		basket.addLineItem(new LineItem(Assist.price1));
+		assertFalse(basket.isEmpty());
+	}
+	
+	@Test
 	public void testBasketAddLineItemWithDiffProducts() {
 		Basket basket = new Basket();
 		basket.addLineItem(new LineItem(Assist.price1));
