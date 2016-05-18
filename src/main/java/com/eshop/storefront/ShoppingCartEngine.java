@@ -37,10 +37,17 @@ public class ShoppingCartEngine {
 	}
 	
 	public void process(Request request) {
+		//validate request
+		if(request.isEmpty()) {
+			throw new IllegalArgumentException("Request is empty");
+		}
+		
+		//search prices/offers from inventory
 		List<String> searchItems = request.getItems().stream().distinct().collect(Collectors.toList());
 		Map<String, Price> prices = inventory.lookupPrices(searchItems);
 		Map<String, List<Offer>> offers = inventory.lookupOffers(searchItems);
 		
+		//prepare basket
 		Basket basket = new Basket();
 		for (String item : request.getItems()) {
 			if(prices.containsKey(item)) {
@@ -50,6 +57,7 @@ public class ShoppingCartEngine {
 			}
 		}
 		
+		//compute basket
 		if(!basket.isEmpty()) {
 			basket.compute();
 			request.setBasket(basket);
