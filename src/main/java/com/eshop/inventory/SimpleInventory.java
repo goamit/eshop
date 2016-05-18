@@ -28,7 +28,7 @@ public class SimpleInventory implements Inventory {
 		addPrice(a, 0.50);
 		addPrice(b, 0.30);
 		addPrice(c, 0.20);
-		addPrice(d, 0.20);
+		addPrice(d, 0.15);
 
 		addOffer(a, OfferType.MBP, 3, 1.30);
 		addOffer(b, OfferType.MBP, 2, 0.45);
