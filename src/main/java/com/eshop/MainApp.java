@@ -19,14 +19,18 @@ public class MainApp {
 		System.out.println("------------------------------------------------------------------------------------");
 		while(true) {
 			String input = scanner.nextLine().trim();
-			if("exit".equalsIgnoreCase(input)) {
-				break;
-			} else {
-				try {
-					process(input);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
+			if(!input.isEmpty()) {
+				if("exit".equalsIgnoreCase(input)) {
+					break;
+				} else {
+					try {
+						process(input);
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 				}
+			} else {
+				System.out.println("No input provided");
 			}
 		}
 		System.out.println("exiting.");
@@ -34,7 +38,7 @@ public class MainApp {
     }
 	
 	public static void process(String input) {
-		//validate and gather input
+		//prepare and submit request
 		Request request = new Request();
 		String[] items = input.split(" ");
 		for (String item : items) {
@@ -42,13 +46,8 @@ public class MainApp {
 				request.addItem(item);
 			}
 		}
-		
-		if(!request.isEmpty()) {
-			request.process();
-			Monitor.display(request);
-		} else {
-			throw new IllegalArgumentException("No input provided");
-		}
+		request.process();
+		Monitor.display(request);
 	}
 	
 }
