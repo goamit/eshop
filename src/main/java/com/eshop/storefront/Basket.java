@@ -43,16 +43,16 @@ public class Basket {
 		}
 	}
 	
+	public boolean isEmpty() {
+		return keys.size() == 0;
+	}
+	
 	public void compute() {
 		total = 0;
 		for (LineItem lineItem : getLineItems().values()) {
 			lineItem.compute();
 			total += lineItem.getTotal(); 
 		}
-	}
-	
-	public boolean isEmpty() {
-		return keys.size() == 0;
 	}
 	
 }
