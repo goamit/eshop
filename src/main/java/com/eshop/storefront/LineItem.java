@@ -42,10 +42,6 @@ public class LineItem {
 		return price;
 	}
 	
-	public boolean hasOffers() {
-		return offers != null && !offers.isEmpty();
-	}
-
 	public int getQty() {
 		return qty;
 	}
@@ -66,27 +62,36 @@ public class LineItem {
 		this.notes.add(note);
 	}
 	
+	public boolean hasOffers() {
+		return offers != null && !offers.isEmpty();
+	}
+
 	public void compute() {
 		notes.clear();
 		total = 0;
 		int targetQty = getQty();
+		//check offers if any
 		if(hasOffers()) {
+			//sort offers highest qty first
 			Collections.sort(offers, (o1, o2) -> o2.getQty() - o1.getQty());
 			for (Offer offer : offers) {
 				if(OfferType.MBP.equals(offer.getType())) {
 					if(targetQty >= offer.getQty()) {
+						//calculate savings
 						int factor = targetQty / offer.getQty();
 						int effectedQty = factor * offer.getQty();
 						double effectedPrice = factor * offer.getPrice();
 						targetQty -= effectedQty; 
 						total += effectedPrice;
-						addNote(offer.getType().getDesc() + " savings " + Format.format((effectedQty * price.getUnitPrice() - effectedPrice)));
+						//add saving note
+						addNote(offer.getDesc() + " savings " + Format.format((effectedQty * price.getUnitPrice() - effectedPrice)));
 					} else {
 						break;
 					}
 				}
 			}
 		}
+		//calculate price of remaining quantity if any 
 		total += targetQty * price.getUnitPrice();
 	}
 	
