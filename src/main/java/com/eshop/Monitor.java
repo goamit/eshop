@@ -29,13 +29,13 @@ public class Monitor {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(BORDER_LINES).append("\n");
-		if(basket.getKeys().isEmpty()) {
+		if(basket.isEmpty()) {
 			sb.append("Basket is empty !").append("\n");
 		} else {
 			sb.append("Basket").append("\n");
-			for (int i = 0; i < basket.getKeys().size(); i++) {
-				String key = basket.getKeys().get(i);
-				sb.append(i + 1).append(")").append(COLSEP).append(prepare(basket.getLineItems().get(key))).append("\n");
+			int i = 1;
+			for (String key : basket.getLineItems().keySet()) {
+				sb.append(i++).append(")").append(COLSEP).append(prepare(basket.getLineItems().get(key))).append("\n");
 			}
 			sb.append(MIDDLE_LINES).append("\n");
 			sb.append("Total").append(COLSEP).append(Format.format(basket.getTotal())).append("\n");
