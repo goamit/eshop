@@ -24,6 +24,7 @@ public class LineItem_Test {
 	@Test
 	public void testLineItemPricing() {
 		LineItem lineItem = new LineItem(Assist.price1);
+		assertFalse(lineItem.hasOffers());
 
 		lineItem.compute();
 
@@ -34,7 +35,8 @@ public class LineItem_Test {
 	@Test
 	public void testLineItemPricingWithOffer() {
 		LineItem lineItem = new LineItem(Assist.price1, Arrays.asList(Assist.offer1));
-
+		assertTrue(lineItem.hasOffers());
+		
 		lineItem.compute();
 
 		assertEquals(1, lineItem.getQty());
