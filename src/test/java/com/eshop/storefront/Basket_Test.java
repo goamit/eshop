@@ -23,7 +23,6 @@ public class Basket_Test {
 		basket.addLineItem(new LineItem(Assist.price1));
 		basket.addLineItem(new LineItem(Assist.price2));
 		
-		assertEquals(2, basket.getKeys().size());
 		assertEquals(2, basket.getLineItems().size());
 		assertEquals(1, basket.getLineItems().get(Assist.price1.getProduct().getName()).getQty());
 		assertEquals(1, basket.getLineItems().get(Assist.price2.getProduct().getName()).getQty());
@@ -35,7 +34,6 @@ public class Basket_Test {
 		basket.addLineItem(new LineItem(Assist.price1));
 		basket.addLineItem(new LineItem(Assist.price1));
 		
-		assertEquals(1, basket.getKeys().size());
 		assertEquals(1, basket.getLineItems().size());
 		assertEquals(2, basket.getLineItems().get(Assist.price1.getProduct().getName()).getQty());
 	}
@@ -49,7 +47,6 @@ public class Basket_Test {
 
 		basket.compute();
 
-		assertEquals(3, basket.getKeys().size());
 		assertEquals(3, basket.getLineItems().size());
 		assertEquals(2.75, basket.getTotal(), 0.0);
 	}
